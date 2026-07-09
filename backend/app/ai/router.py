@@ -9,6 +9,7 @@ structured_llm = llm.with_structured_output(
 )
 
 
+
 def decide_route(message: str) -> RouteDecision:
     return structured_llm.invoke(
         [

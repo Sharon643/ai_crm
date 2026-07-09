@@ -16,6 +16,7 @@ export default function ActionItems() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
+    document.title = "Action Items";
     loadActionItems();
   }, []);
 
@@ -34,24 +35,36 @@ export default function ActionItems() {
     }
   }
 
+  const filteredGroups = groups.filter((group) => {
+    const searchTerm = search.toLowerCase();
+
+    return (
+      group.hcp.name.toLowerCase().includes(searchTerm) ||
+      (group.hcp.hospital ?? "")
+        .toLowerCase()
+        .includes(searchTerm)
+    );
+  });
+
   return (
     <>
       <Header />
 
       <main className="action-items-page">
         <div className="action-items-header">
-          <h2>Action Items</h2>
+          <h2>AI Generated Action Items</h2>
 
           <p>
-            Track pending follow-ups generated from Healthcare Professional
-            interactions.
+            These follow-up tasks were automatically generated from your
+            Healthcare Professional interactions and organized by priority.
           </p>
         </div>
+
         <input
-        className="search-box"
-        placeholder="Search Healthcare Professional..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+          className="search-box"
+          placeholder="Search by Healthcare Professional or Hospital..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
 
         {loading && (
@@ -66,30 +79,21 @@ export default function ActionItems() {
           </div>
         )}
 
-        {!loading && !error && groups.length === 0 && (
+        {!loading && !error && filteredGroups.length === 0 && (
           <div className="empty-state">
             <h3>🎉 You're all caught up!</h3>
 
             <p>
               No pending action items were found. New follow-up tasks will
-              automatically appear here after you save interactions.
+              automatically appear here whenever you save Healthcare Professional
+              interactions.
             </p>
           </div>
         )}
 
         {!loading &&
           !error &&
-          groups
-            .filter(group =>
-                group.hcp.name
-                    .toLowerCase()
-                    .includes(search.toLowerCase()) ||
-
-                group.hcp.hospital
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
-            )
-            .map((group) => (
+          filteredGroups.map((group) => (
             <ActionItemCard
               key={group.hcp.id}
               group={group}

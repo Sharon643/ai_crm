@@ -122,3 +122,20 @@ def update_action_status(
     db.refresh(action)
 
     return action
+
+
+
+def get_pending_actions(db: Session):
+
+    actions = (
+        db.query(ActionItem)
+        .filter(
+            ActionItem.status == "Pending"
+        )
+        .order_by(
+            ActionItem.priority.desc()
+        )
+        .all()
+    )
+
+    return actions

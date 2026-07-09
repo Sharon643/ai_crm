@@ -36,8 +36,15 @@ def create_interaction_api(
         .first()
     )
 
-    # Create HCP if not found
-    if not hcp:
+    if hcp:
+        # Keep HCP details up to date
+        if request.hospital:
+            hcp.hospital = request.hospital
+
+        db.commit()
+        db.refresh(hcp)
+
+    else:
         hcp = HCP(
             name=request.hcpName,
             hospital=request.hospital,
@@ -46,7 +53,6 @@ def create_interaction_api(
         db.add(hcp)
         db.commit()
         db.refresh(hcp)
-
     # Save interaction
     interaction = Interaction(
         hcp_id=hcp.id,

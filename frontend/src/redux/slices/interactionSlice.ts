@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface InteractionState {
   hcpName: string;
+  hospital: string;
   interactionType: string;
   date: string;
   time: string;
@@ -19,6 +20,7 @@ export interface InteractionState {
 
 const initialState: InteractionState = {
   hcpName: "",
+  hospital: "",
   interactionType: "",
   date: "",
   time: "",
@@ -35,6 +37,7 @@ const initialState: InteractionState = {
 
 export type FormField =
   | "hcpName"
+  | "hospital"
   | "interactionType"
   | "date"
   | "time"
@@ -77,6 +80,7 @@ const interactionSlice = createSlice({
         Pick<
           InteractionState,
           | "hcpName"
+          | "hospital"
           | "interactionType"
           | "date"
           | "time"

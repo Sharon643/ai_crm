@@ -28,7 +28,7 @@ export default function Header() {
         <NavLink
           to="/action-items"
         >
-          Action Items
+          Actions
         </NavLink>
 
       </nav>

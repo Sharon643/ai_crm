@@ -13,7 +13,7 @@ from app.langgraph.tools import (
     edit_interaction,
     meeting_preparation,
     visit_planner,
-    extract_action_items,
+    action_items,
 )
 
 
@@ -65,12 +65,52 @@ def edit_node(state: GraphState):
         "result": result,
     }
 
+def planner_node(state):
+
+    result = visit_planner.invoke(
+        {
+            "user_input": state["message"]
+        }
+    )
+
+    return {
+        **state,
+        "result": result,
+    }
+
+def meeting_node(state):
+
+    result = meeting_preparation.invoke(
+        {
+            "user_input": state["message"]
+        }
+    )
+
+    return {
+        **state,
+        "result": result,
+    }
+
+def actions_node(state):
+    result = action_items.invoke(
+        {
+            "user_input": state["message"],
+        }
+    )
+
+    return {
+        **state,
+        "result": result,
+    }
 
 builder = StateGraph(GraphState)
 
 builder.add_node("router", router_node)
 builder.add_node("log", log_node)
 builder.add_node("edit", edit_node)
+builder.add_node("planner",planner_node,)
+builder.add_node("meeting",meeting_node,)
+builder.add_node("actions", actions_node)
 
 builder.add_edge(START, "router")
 
@@ -80,10 +120,17 @@ builder.add_conditional_edges(
     {
         "log": "log",
         "edit": "edit",
+        "planner": "planner",
+        "meeting": "meeting",
+        "actions": "actions",
     },
 )
 
 builder.add_edge("log", END)
 builder.add_edge("edit", END)
+builder.add_edge("planner", END)
+builder.add_edge("meeting",END,)
+builder.add_edge("actions", END)
+
 
 graph = builder.compile()

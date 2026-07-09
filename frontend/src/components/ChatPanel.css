@@ -92,19 +92,21 @@
 }
 
 .chat-input button {
-    padding: 12px 20px;
+  background: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-    border: none;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: 600;
+.chat-input button:hover {
+  background: #1d4ed8;
 }
 
 .chat-input button:disabled {
-    cursor: not-allowed;
-
-    opacity: .6;
+  background: #9ca3af;
+  cursor: not-allowed;
 }

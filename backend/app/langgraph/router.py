@@ -9,25 +9,40 @@ def route_message(message: str) -> str:
     ]
 
     meeting_keywords = [
-        "prepare",
-        "meeting brief",
+        "prepare me",
         "meeting preparation",
+        "meeting prep",
+        "meeting brief",
+        "brief me",
+        "prepare for my meeting",
     ]
 
     planner_keywords = [
-        "visit plan",
         "visit planner",
+        "visit plan",
         "plan my visits",
+        "plan today's visits",
         "today's visits",
+        "today visits",
+        "who should i visit",
+        "who should i meet",
+        "recommend visits",
     ]
 
     action_keywords = [
         "action items",
-        "action item",
+        "actions",
+        "my actions",
+        "pending actions",
+        "pending action items",
         "tasks",
-        "to-do",
+        "my tasks",
         "todo",
+        "show my action items",
+        "show my tasks",
     ]
+
+    
 
     if any(keyword in message for keyword in edit_keywords):
         return "edit"

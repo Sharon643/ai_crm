@@ -21,6 +21,11 @@ import {
 } from "../redux/slices/interactionSlice";
 
 import { sendChatMessage } from "../services/api";
+import { useNavigate } from "react-router-dom";
+
+import { setVisitPlan } from "../redux/slices/plannerSlice";
+import ReactMarkdown from "react-markdown";
+
 
 type ToolResponse = {
   type: string;
@@ -31,6 +36,7 @@ type ToolResponse = {
 
 export default function ChatPanel() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { messages, loading } = useAppSelector(
     (state) => state.chat
@@ -102,12 +108,35 @@ export default function ChatPanel() {
           break;
 
         case "planner":
-          // Will be implemented later
-          break;
 
-        case "actions":
-          // Will be implemented later
-          break;
+            console.log(tool);
+
+            if (
+                tool.success &&
+                tool.payload &&
+                tool.payload.visits &&
+                tool.payload.visits.length > 0
+            ) {
+            dispatch(
+                setVisitPlan(tool.payload.visits)
+            );
+
+            setTimeout(() => {
+                navigate("/visit-planner");
+            }, 2000);
+            } else {
+                console.error("Planner payload:", tool);
+            }
+
+            break;
+
+            case "actions":
+
+                setTimeout(() => {
+                    navigate("/action-items");
+                }, 2000);
+
+                break;
 
         default:
           console.warn(
@@ -161,7 +190,9 @@ export default function ChatPanel() {
             key={index}
             className={`message ${message.sender}`}
           >
+          <ReactMarkdown>
             {message.message}
+            </ReactMarkdown>
           </div>
         ))}
 

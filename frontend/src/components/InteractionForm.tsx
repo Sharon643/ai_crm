@@ -19,6 +19,8 @@ import type {
   FormField,
 } from "../redux/slices/interactionSlice";
 import { createInteraction } from "../services/api";
+import { addMessage, clearChat } from "../redux/slices/chatSlice";
+import toast from "react-hot-toast";
 
 export default function InteractionForm() {
   const dispatch = useAppDispatch();
@@ -50,7 +52,7 @@ const handleSubmit = async (
   try {
     await createInteraction({
       hcpName: form.hcpName,
-      hospital: "",
+      hospital: form.hospital,
       interactionType: form.interactionType,
       date: form.date,
       time: form.time,
@@ -63,13 +65,27 @@ const handleSubmit = async (
       summary: "",
     });
 
-    alert("Interaction saved successfully.");
+    toast.success("Interaction saved successfully.");
 
     dispatch(resetForm());
+
+    dispatch(
+      addMessage({
+        sender: "assistant",
+        message:
+          "✅ Interaction saved successfully.\n\nYour action items have been generated. You can now ask me to:\n\n• Show my action items\n• Plan my visits for today\n• Prepare me for my meeting",
+      })
+    );
+
+    setTimeout(() => {
+      dispatch(clearChat());
+    }, 3000);
   } catch (error) {
     console.error(error);
 
-    alert("Failed to save interaction.");
+    toast.error(
+      "Failed to save interaction. Please try again."
+    );
   }
 };
 
