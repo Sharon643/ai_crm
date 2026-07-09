@@ -1,0 +1,55 @@
+.action-items-page {
+
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    padding: 0 24px;
+}
+
+.action-items-header {
+
+    margin-bottom: 32px;
+}
+
+.action-items-header h2 {
+
+    font-size: 2rem;
+
+    margin-bottom: 8px;
+}
+
+.action-items-header p {
+
+    color: #6b7280;
+}
+
+.empty-state {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 56px;
+
+    text-align: center;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 6px 16px rgba(0,0,0,.05);
+}
+
+.search-box{
+
+    width:100%;
+
+    padding:14px 18px;
+
+    margin-bottom:24px;
+
+    border-radius:12px;
+
+    border:1px solid #ddd;
+
+    font-size:15px;
+}

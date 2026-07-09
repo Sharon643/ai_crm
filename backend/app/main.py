@@ -8,6 +8,7 @@ from app.api.hcp import router as hcp_router
 from app.api.interaction import router as interaction_router
 from app.api.chat import router as chat_router
 from app.models.action_item import ActionItem
+from app.api import action_items
 
 Base.metadata.create_all(bind=engine)
 
@@ -27,6 +28,7 @@ app.add_middleware(
 app.include_router(hcp_router)
 app.include_router(interaction_router)
 app.include_router(chat_router)
+app.include_router(action_items.router)
 
 @app.get("/")
 def health_check():

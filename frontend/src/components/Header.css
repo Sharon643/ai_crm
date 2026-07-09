@@ -1,16 +1,52 @@
 .header {
-    background: white;
-    padding: 20px 32px;
-    border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 36px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 28px;
-    font-weight: 700;
+.brand h1 {
+  margin: 0;
+  font-size: 1.6rem;
 }
 
-.header p {
-    margin-top: 6px;
-    color: #6b7280;
+.brand p {
+  margin-top: 6px;
+
+  color: #6b7280;
+
+  font-size: 0.9rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+
+  color: #6b7280;
+
+  font-weight: 600;
+
+  transition: .2s;
+}
+
+.nav-links a:hover {
+  color: #2563eb;
+}
+
+.nav-links a.active {
+  color: #2563eb;
 }

@@ -1,6 +1,7 @@
 from typing import Literal
 
 from pydantic import BaseModel
+from typing import Literal
 
 
 Priority = Literal[
@@ -36,3 +37,10 @@ class ActionItemResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class ActionStatusUpdate(BaseModel):
+    status: Literal[
+        "Pending",
+        "Completed",
+    ]
