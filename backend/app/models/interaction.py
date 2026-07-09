@@ -41,3 +41,8 @@ class Interaction(Base):
     summary = Column(Text)
 
     hcp = relationship("HCP")
+
+    action_items = relationship(
+    "ActionItem",
+    back_populates="interaction",
+    cascade="all, delete-orphan",)

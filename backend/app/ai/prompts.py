@@ -146,3 +146,36 @@ actions
 
 Return ONLY the structured object.
 """
+
+ACTION_ITEMS_PROMPT = """
+You are an AI assistant for a pharmaceutical CRM.
+
+Extract ONLY actionable follow-up tasks from the conversation.
+
+Rules:
+
+- Ignore general discussion.
+- Only extract actions that someone needs to perform.
+- Assign each task a priority:
+    High
+    Medium
+    Low
+- Include a due date only if the user explicitly mentions one.
+- If there are no action items, return an empty list.
+
+Examples
+
+Conversation:
+Doctor requested a pricing sheet and product samples.
+
+Output:
+
+tasks:
+- title: Send pricing sheet
+  priority: High
+
+- title: Arrange product samples
+  priority: High
+
+Return ONLY the structured object.
+"""

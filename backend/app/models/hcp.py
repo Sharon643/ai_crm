@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 from app.database.database import Base
 
 
@@ -12,3 +13,8 @@ class HCP(Base):
     specialization = Column(String)
 
     hospital = Column(String)
+
+    action_items = relationship(
+    "ActionItem",
+    back_populates="hcp",
+)

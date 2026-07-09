@@ -7,6 +7,7 @@ from app.models.interaction import Interaction
 from app.api.hcp import router as hcp_router
 from app.api.interaction import router as interaction_router
 from app.api.chat import router as chat_router
+from app.models.action_item import ActionItem
 
 Base.metadata.create_all(bind=engine)
 
